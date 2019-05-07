@@ -1,0 +1,8 @@
+install.packages("dplyr")
+library(dplyr)
+my_data <- read.csv2("household_power_consumption.txt")
+days <- filter(my_data, Date == "1/2/2007" | Date == "2/2/2007")
+DateTime <- strptime(paste(days$Date, days$Time), "%d/%m/%Y %H:%M:%S")
+png(file="plot2.png",width=480,height=480)
+plot(DateTime,as.numeric(days$Global_active_power)/1000, type = "l", ylab= "Global Active Power (kilowatts)", xlab="")
+dev.off()
